@@ -43,17 +43,24 @@ var Guardar = function(){
     var cedula = document.getElementById('idCedula').value;
     var nombre = document.getElementById('idNombre').value;
     var apellido = document.getElementById('idApellido').value;
-
+    var fechaNacimiento = document.getElementById('idFechaNacimiento').value;
+    var genMasculino = document.querySelector('#idGeneroMasculino');
+    var genFemenino = document.querySelector('#idGeneroFemenino');
+    console.log("genMasculino"+genMasculino);
+    console.log("genFemenino"+genFemenino);
+    var genero = validarCheckedGenero(genMasculino,genMasculino);
 
     var persona = {
         cedula:cedula,
         nombre:nombre,
-        apellido:apellido 
-
+        apellido:apellido,
+        fechadeNacimiento:fechaNacimiento,
+        genero:genero
     }
 
     console.log("El usuario ingresa los siguientes datos:");
-    console.log("Cedula: "+cedula+' // Nombre:'+nombre+ " // Apellido: "+apellido );
+    console.log("Cedula: "+persona.cedula+' // Nombre:'+ persona.nombre+ " // Apellido: "+ persona.apellido );
+    console.log("Fecha de naciniento: "+ persona.fechadeNacimiento+' // Genero:'+ persona.genero);
 
     validarCedula(persona, cedula);
     console.log(listaDeDatos);
@@ -72,7 +79,7 @@ var validarCedula = function (persona, cedula){
         
         Swal.fire({
             icon: "success",
-            title: "Usuario guradado",
+            title: "Usuario guardado",
             text: "Se guardo su cedula correctamente"
           });
 
@@ -83,6 +90,18 @@ var validarCedula = function (persona, cedula){
             title: "Error",
             text: "La cedula ya existe"
           });
+    }
+}
+
+var validarCheckedGenero = function (genMasculino, genFemenino){
+    if (genMasculino.checked){
+        console.log("Entro a masculino");
+        return 'Masculino';
+    }
+
+    if (genFemenino.checked){
+        console.log("Entro a Femenino");
+        return 'Femenino';
     }
 }
 

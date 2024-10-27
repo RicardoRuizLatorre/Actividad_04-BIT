@@ -26,36 +26,40 @@
 
             <!-- Input del numero de cedula -->
             <div class="form-group col-12">
-              <label for="cedula">Cedula:</label>
+              <label for="idCedula">Cedula:</label>
               <input type="number" class="form-control" id="idCedula">
             </div>
              <!-- Input del nombre -->
             <div class="form-group col-12">
-              <label for="nombre">Nombre:</label>
+              <label for="idNombre">Nombre:</label>
               <input type="text" class="form-control" id="idNombre">
             </div>
 
              <!-- Input del Apellido -->
              <div class="form-group col-12">
-              <label for="apellido">Apellido:</label>
+              <label for="idApellido">Apellido:</label>
               <input type="text" class="form-control" id="idApellido">
             </div>
 
             <!-- Input del Fecha de Nacimiento -->
             <div class="form-group col-12"> 
-              <label for="fechaDeNacimiento">Fecha de Nacimiento:</label>
+              <label for="idFechaNacimiento">Fecha de Nacimiento:</label>
               <input type="date" class="form-control" id="idFechaNacimiento">
             </div>
 
 
             <!-- Genero -->
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-              <label class="form-check-label" for="inlineRadio1">1</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-              <label class="form-check-label" for="inlineRadio2">2</label>
+            <div class="form-group col-12">
+              <label>Genero:</label>
+              <br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="nameGenero" id="idGeneroFemenino" value="Femenino">
+                <label class="form-check-label" for="idGeneroFemenino">Femenino</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="nameGenero" id="idGeneroMasculino" value="Masculino">
+                <label class="form-check-label" for="idGeneroMasculino">Masculino</label>
+              </div>
             </div>
 
           </form>
