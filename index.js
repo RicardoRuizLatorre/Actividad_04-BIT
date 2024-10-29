@@ -1,22 +1,29 @@
+
 var listaDeDatos = [];
 
 var cargarDatos = function (){
-    datos = JSON.parse(localStorage.getItem('listaDeDatos'));
+    /*getStorage de que archivo se quieren sacar los datos  */
+    /* JSON.parse(localStorage.getItem convierte  texto array */
+    console.log('Entra a funcion carga datos')
+    listaDeDatos = JSON.parse(localStorage.getItem("listaDeDatosLS")); 
     if (listaDeDatos == null){
         listaDeDatos = [];
-
+        console.log('Sin datos');
     }
+    mostrarListaDeDatos();
 }
 
-
 var borrarListaDeDatos = function(){
-    datos=[];
-    localStorage.removeItem('listaDeDatos');
+    datos=[]; /*rescribe la variable en blanco */
+    localStorage.removeItem('listaDeDatos'); /* porra del local storage */
 }
 
 var mostrarListaDeDatos = function (){
-
-    
+    console.log('Entra a la funcion mostrar lista');
+    for (let index = 0; index < listaDeDatos.length; index++) {
+        const element = listaDeDatos[index];
+        console.log('Cedula: '+element.cedula+'|| Nombre: '+element.nombre+ '|| Apellido: '+element.apellido+ '|| Fecha de Nacimiento: ' +element.fechaNacimiento+ '|| Genero: '+element.genero)
+    }
 }
 
 var borrarPorCedula = function (){
@@ -39,6 +46,7 @@ var borrarPorCedula = function (){
 
 }
 
+/*Funcion para guardar la persona*/
 var Guardar = function(){
     var cedula = document.getElementById('idCedula').value;
     var nombre = document.getElementById('idNombre').value;
@@ -46,9 +54,8 @@ var Guardar = function(){
     var fechaNacimiento = document.getElementById('idFechaNacimiento').value;
     var genMasculino = document.querySelector('#idGeneroMasculino');
     var genFemenino = document.querySelector('#idGeneroFemenino');
-    console.log("genMasculino"+genMasculino);
-    console.log("genFemenino"+genFemenino);
-    var genero = validarCheckedGenero(genMasculino,genMasculino);
+
+    var genero = validarCheckedGenero(genMasculino,genFemenino);
 
     var persona = {
         cedula:cedula,
@@ -64,6 +71,7 @@ var Guardar = function(){
 
     validarCedula(persona, cedula);
     console.log(listaDeDatos);
+    cargarDatos();
 
 }
 
@@ -74,7 +82,7 @@ var validarCedula = function (persona, cedula){
 
     if (posicion == -1 ){
         listaDeDatos.push(persona);
-        localStorage.setItem('listaDeDatos', JSON.stringify(persona))
+        localStorage.setItem('listaDeDatosLS', JSON.stringify(listaDeDatos)) /* Guarda con persistencia el persona en la lista de datos  JSON.stringify(persona) vpnvierte array en cadena de texto*/
         console.log("Usuario guardado con exito")
         
         Swal.fire({
@@ -93,15 +101,115 @@ var validarCedula = function (persona, cedula){
     }
 }
 
+/*Valida que opcion de radio genero selecciona el paciente */
 var validarCheckedGenero = function (genMasculino, genFemenino){
     if (genMasculino.checked){
-        console.log("Entro a masculino");
+        console.log("***Selecciono Masculino***");
         return 'Masculino';
-    }
-
-    if (genFemenino.checked){
-        console.log("Entro a Femenino");
+    }else if (genFemenino.checked){
+        console.log("***Selecciono Femenino***");
         return 'Femenino';
+    }else{
+        console.log("***Sin seleccionar***");
     }
 }
+
+var BuscarCedula = function() { 
+    var cedulaBuscar='147852'
+   // var cedulaBuscar=retornarCedulaDigitaliza();
+    var posicion = listaDeDatos.findIndex((intem) => intem.cedula == cedulaBuscar);
+    console.log('Posicion ='+ posicion+' Cedula= '+cedulaBuscar);
+
+   if(posicion == -1){
+        console.log("***Cedula no encontrada***")
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "La cedula no encontrada"
+          });   
+    }else {
+        Swal.fire({
+           // icon: "success",
+            title: `Datos de la cedula ${listaDeDatos[posicion].cedula}`,
+            text: `${listaDeDatos[posicion].nombre}  ${listaDeDatos[posicion].apellido} nacio en ${listaDeDatos[posicion].fechadeNacimiento}\n
+             de genero ${listaDeDatos[posicion].genero}`
+        });
+    }
+ 
+  
+}
+/*Funcion para buscar y borrar por cedula*/
+var buscaryBorrarporCedula = function(){
+    console.log('Entra a funcion buscar y borrar');
+    var cedulaAEliminar = document.getElementById('buscarcedula').value;
+    var pos = listaDeDatos.findIndex((item) => item.cedula == cedulaAEliminar)
+
+    if (pos == -1){
+        console.log('Cedula no existe')
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "La cedula no encontrada"
+          });
+    }else {
+        /*borrado del array*/
+        listaDeDatos.splice(pos,1);
+        /**Sincroniza el local storage con el nuevo cambio */
+        localStorage.setItem('listaDeDatos', JSON.stringify(listaDeDatos));
+        console.log('Usuario borrado')
+        Swal.fire({
+            icon: "success",
+            title: "Usuario borrado",
+            text: "Se se elimino cedula"
+        });
+
+    }
+}
+
+var retornarCedulaDigitaliza = function (){
+    let banderaSalida = false;
+    let cedula=0;
+    console.log('entra al alert'+banderaSalida );
+
+   // while (!banderaSalida){
+        console.log('entra al alert 2');
+        Swal.fire({
+            title: "Digite el numero de cedula a buscar",
+            input: 'text',
+            showCancelButton: true,
+            confirmButtonText: "Consultar",
+            cancelButtonText: "Cancelar",
+            timer:10000,
+            inputValidator: nombre =>{
+                if (!nombre){
+                    return "Por favor digite el numero de cedula";
+                }else {
+                    return undefined;
+                }
+            }
+          })
+          .then(resultado => {
+            if (resultado.value){
+                let cedula = resultado.value
+                console.log('Cedula ='+cedula);
+                banderaSalida = true
+            }
+          });
+
+          if(cedula == 0 && !banderaSalida){
+            console.log('Usuario no ingresa datos');
+            return 0;
+          }else if (cedula != 0 && !banderaSalida){
+            console.log('Cedula= '+ cedula);
+            return cedula
+
+          }
+
+
+   // }
+    console.log('Cedula2 ='+cedula);
+    return cedula;
+} 
+
+cargarDatos();
 

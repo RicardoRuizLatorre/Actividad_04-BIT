@@ -10,8 +10,6 @@
 
     <!-- CSS -->
     <link href="./index.css" rel="stylesheet" type="text/css" />
-  
-
 
     <title>Actividad 4: Registro de cedulas</title>
   </head>
@@ -47,7 +45,6 @@
               <input type="date" class="form-control" id="idFechaNacimiento">
             </div>
 
-
             <!-- Genero -->
             <div class="form-group col-12">
               <label>Genero:</label>
@@ -65,7 +62,8 @@
           </form>
             
           <div class="col-12">
-            <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
+            <button type="button" class="btn btn-primary" id="buttonGuardar" onclick="Guardar()">Guardar</button>
+            <button type="button" class="btn btn-secondary" id="buttonBuscarCedula" onclick="BuscarCedula()">Buscar Cedula</button>
           </div>
 
 
@@ -88,5 +86,9 @@
 
     <!-- sweetalert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.14.4/dist/sweetalert2.min.css
+" rel="stylesheet">
+
   </body>
 </html>
