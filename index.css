@@ -1,6 +1,16 @@
 .container {
     background-color: aqua;
-    margin: 1rem;
+    margin: 2rem;
     padding: 1rem;
+    border-radius: 1rem;
+    max-width: 250px;
 
+}
+
+.h1, h1 {
+    font-size: 25px;
+}
+
+#seccion2{
+    background-color: aqua;
 }

@@ -115,8 +115,8 @@ var validarCheckedGenero = function (genMasculino, genFemenino){
 }
 
 var BuscarCedula = function() { 
-    var cedulaBuscar='147852'
-   // var cedulaBuscar=retornarCedulaDigitaliza();
+    var cedulaBuscar=0;
+    var cedulaBuscar= document.getElementById('idCedulaBuscar').value;
     var posicion = listaDeDatos.findIndex((intem) => intem.cedula == cedulaBuscar);
     console.log('Posicion ='+ posicion+' Cedula= '+cedulaBuscar);
 
@@ -165,51 +165,5 @@ var buscaryBorrarporCedula = function(){
 
     }
 }
-
-var retornarCedulaDigitaliza = function (){
-    let banderaSalida = false;
-    let cedula=0;
-    console.log('entra al alert'+banderaSalida );
-
-   // while (!banderaSalida){
-        console.log('entra al alert 2');
-        Swal.fire({
-            title: "Digite el numero de cedula a buscar",
-            input: 'text',
-            showCancelButton: true,
-            confirmButtonText: "Consultar",
-            cancelButtonText: "Cancelar",
-            timer:10000,
-            inputValidator: nombre =>{
-                if (!nombre){
-                    return "Por favor digite el numero de cedula";
-                }else {
-                    return undefined;
-                }
-            }
-          })
-          .then(resultado => {
-            if (resultado.value){
-                let cedula = resultado.value
-                console.log('Cedula ='+cedula);
-                banderaSalida = true
-            }
-          });
-
-          if(cedula == 0 && !banderaSalida){
-            console.log('Usuario no ingresa datos');
-            return 0;
-          }else if (cedula != 0 && !banderaSalida){
-            console.log('Cedula= '+ cedula);
-            return cedula
-
-          }
-
-
-   // }
-    console.log('Cedula2 ='+cedula);
-    return cedula;
-} 
-
 cargarDatos();
 
