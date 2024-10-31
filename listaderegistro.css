@@ -1,16 +1,17 @@
+
 .container {
-    background-color: aqua;
+    background-color: #00ffff6e;
     margin: 2rem;
     padding: 1rem;
     border-radius: 1rem;
-    max-width: 250px;
+    max-width: 630px;
 
 }
 
 .h1, h1 {
     font-size: 25px;
+    justify-content: center;
 }
-
 
 .botonRedireccion{
     background-color: #007bff;

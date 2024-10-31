@@ -13,38 +13,18 @@ var cargarDatos = function (){
     mostrarListaDeDatos();
 }
 
-var borrarListaDeDatos = function(){
-    datos=[]; /*rescribe la variable en blanco */
-    localStorage.removeItem('listaDeDatos'); /* porra del local storage */
-}
+
 
 var mostrarListaDeDatos = function (){
     console.log('Entra a la funcion mostrar lista');
+   
     for (let index = 0; index < listaDeDatos.length; index++) {
         const element = listaDeDatos[index];
-        console.log('Cedula: '+element.cedula+'|| Nombre: '+element.nombre+ '|| Apellido: '+element.apellido+ '|| Fecha de Nacimiento: ' +element.fechaNacimiento+ '|| Genero: '+element.genero)
+        console.log('Cedula: '+element.cedula+'|| Nombre: '+element.nombre+ '|| Apellido: '+element.apellido+ '|| Fecha de Nacimiento: ' +element.fechadeNacimiento+ '|| Genero: '+element.genero)
+
     }
 }
 
-var borrarPorCedula = function (){
-    var cedulaAEliminar = document.getElementById('buscarcedula').value;
-    console.log(cedulaAEliminar);
-    var pos = listaDeDatos.findIndex((intem) => intem.cedula == cedulaAEliminar);
-
-    if(pos == -1){
-        Swal.fire({
-            icon: "error",
-            title: "Usuario no encontrado",
-            text: "Cedula no existe"
-          });
-
-    }else{
-        listaDeDatos.splice(pos,1);
-        //Actualiza la lista
-        localStorage.setItem('listaDeDatos', JSON.stringify(listaDeDatos)) 
-    }
-
-}
 
 /*Funcion para guardar la persona*/
 var Guardar = function(){
@@ -138,32 +118,6 @@ var BuscarCedula = function() {
  
   
 }
-/*Funcion para buscar y borrar por cedula*/
-var buscaryBorrarporCedula = function(){
-    console.log('Entra a funcion buscar y borrar');
-    var cedulaAEliminar = document.getElementById('buscarcedula').value;
-    var pos = listaDeDatos.findIndex((item) => item.cedula == cedulaAEliminar)
 
-    if (pos == -1){
-        console.log('Cedula no existe')
-        Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "La cedula no encontrada"
-          });
-    }else {
-        /*borrado del array*/
-        listaDeDatos.splice(pos,1);
-        /**Sincroniza el local storage con el nuevo cambio */
-        localStorage.setItem('listaDeDatos', JSON.stringify(listaDeDatos));
-        console.log('Usuario borrado')
-        Swal.fire({
-            icon: "success",
-            title: "Usuario borrado",
-            text: "Se se elimino cedula"
-        });
-
-    }
-}
 cargarDatos();
 
